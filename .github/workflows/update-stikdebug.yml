@@ -58,7 +58,7 @@ jobs:
           source = {
               'name': 'StikDebug (Unofficial AltStore Source)',
               'identifier': 'com.intraducine.livecontainer-sources.stikdebug.v2',
-              'sourceURL': 'https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug-v2.json',
+              'sourceURL': 'https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug.json',
               'apps': [{
                   'name': 'StikDebug',
                   'bundleIdentifier': bundle_id,
@@ -79,7 +79,7 @@ jobs:
               }]
           }
 
-          with open('stikdebug-v2.json', 'w', encoding='utf-8') as f:
+          with open('stikdebug.json', 'w', encoding='utf-8') as f:
               json.dump(source, f, indent=2, ensure_ascii=False)
               f.write('\n')
           PY
@@ -88,6 +88,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add stikdebug-v2.json
+          git add stikdebug.json
           git diff --cached --quiet || git commit -m 'Update StikDebug AltSource'
           git push
