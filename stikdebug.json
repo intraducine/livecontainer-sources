@@ -1,6 +1,6 @@
 {
   "name": "StikDebug (Unofficial AltStore Source)",
-  "identifier": "com.intraducine.livecontainer-sources.stikdebug",
+  "identifier": "com.intraducine.livecontainer-sources.stikdebug.v2",
   "sourceURL": "https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug.json",
   "apps": [
     {
@@ -13,10 +13,10 @@
       "versions": [
         {
           "version": "3.1.6",
-          "buildVersion": "1",
+          "buildVersion": "316",
           "date": "2026-06-16T00:00:00Z",
           "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/latest/download/StikDebug.ipa",
-          "size": 0,
+          "size": 1,
           "minOSVersion": "17.4"
         }
       ]
