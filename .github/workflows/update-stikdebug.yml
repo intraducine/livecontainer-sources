@@ -3,7 +3,7 @@ name: Update StikDebug AltSource
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '17 12 * * *'
 
 permissions:
   contents: write
@@ -35,12 +35,18 @@ jobs:
           if not ipa:
               raise SystemExit('Latest StikDebug release has no IPA asset')
 
-          req = urllib.request.Request(ipa['browser_download_url'], headers={'User-Agent': 'LiveContainer-StikDebug-AltSource'})
+          req = urllib.request.Request(
+              ipa['browser_download_url'],
+              headers={'User-Agent': 'LiveContainer-StikDebug-AltSource'}
+          )
           with urllib.request.urlopen(req) as r:
               ipa_bytes = r.read()
 
           with zipfile.ZipFile(io.BytesIO(ipa_bytes)) as z:
-              plist_path = next(n for n in z.namelist() if n.startswith('Payload/') and n.endswith('.app/Info.plist'))
+              plist_path = next(
+                  n for n in z.namelist()
+                  if n.startswith('Payload/') and n.endswith('.app/Info.plist')
+              )
               info = plistlib.loads(z.read(plist_path))
 
           version = str(info.get('CFBundleShortVersionString') or release['tag_name'].lstrip('v'))
@@ -51,8 +57,8 @@ jobs:
 
           source = {
               'name': 'StikDebug (Unofficial AltStore Source)',
-              'identifier': 'com.intraducine.livecontainer-sources.stikdebug',
-              'sourceURL': 'https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug.json',
+              'identifier': 'com.intraducine.livecontainer-sources.stikdebug.v2',
+              'sourceURL': 'https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug-v2.json',
               'apps': [{
                   'name': 'StikDebug',
                   'bundleIdentifier': bundle_id,
@@ -73,7 +79,7 @@ jobs:
               }]
           }
 
-          with open('stikdebug.json', 'w', encoding='utf-8') as f:
+          with open('stikdebug-v2.json', 'w', encoding='utf-8') as f:
               json.dump(source, f, indent=2, ensure_ascii=False)
               f.write('\n')
           PY
@@ -82,6 +88,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add stikdebug.json
+          git add stikdebug-v2.json
           git diff --cached --quiet || git commit -m 'Update StikDebug AltSource'
           git push
