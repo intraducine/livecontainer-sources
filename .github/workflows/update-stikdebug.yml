@@ -1,0 +1,87 @@
+name: Update StikDebug AltSource
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate AltSource from latest StikDebug release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import io, json, os, plistlib, urllib.request, zipfile
+          from datetime import datetime, timezone
+
+          api = 'https://api.github.com/repos/StephenDev0/StikDebug/releases/latest'
+          req = urllib.request.Request(api, headers={
+              'Accept': 'application/vnd.github+json',
+              'Authorization': f"Bearer {os.environ['GH_TOKEN']}",
+              'User-Agent': 'LiveContainer-StikDebug-AltSource'
+          })
+          with urllib.request.urlopen(req) as r:
+              release = json.load(r)
+
+          ipa = next((a for a in release.get('assets', []) if a['name'].lower().endswith('.ipa')), None)
+          if not ipa:
+              raise SystemExit('Latest StikDebug release has no IPA asset')
+
+          req = urllib.request.Request(ipa['browser_download_url'], headers={'User-Agent': 'LiveContainer-StikDebug-AltSource'})
+          with urllib.request.urlopen(req) as r:
+              ipa_bytes = r.read()
+
+          with zipfile.ZipFile(io.BytesIO(ipa_bytes)) as z:
+              plist_path = next(n for n in z.namelist() if n.startswith('Payload/') and n.endswith('.app/Info.plist'))
+              info = plistlib.loads(z.read(plist_path))
+
+          version = str(info.get('CFBundleShortVersionString') or release['tag_name'].lstrip('v'))
+          build = str(info.get('CFBundleVersion') or '1')
+          bundle_id = str(info['CFBundleIdentifier'])
+          min_os = str(info.get('MinimumOSVersion') or '17.4')
+          published = release.get('published_at') or datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
+
+          source = {
+              'name': 'StikDebug',
+              'identifier': 'com.intraducine.livecontainer-sources.stikdebug',
+              'sourceURL': 'https://raw.githubusercontent.com/intraducine/livecontainer-sources/main/stikdebug.json',
+              'apps': [{
+                  'name': 'StikDebug',
+                  'bundleIdentifier': bundle_id,
+                  'developerName': 'StephenDev0',
+                  'subtitle': 'On-device debugger and JIT enabler',
+                  'localizedDescription': 'An on-device debugger and JIT enabler for iOS 17.4 and newer, powered by idevice.',
+                  'iconURL': 'https://avatars.githubusercontent.com/u/109808333?v=4',
+                  'tintColor': '4A90E2',
+                  'versions': [{
+                      'version': version,
+                      'buildVersion': build,
+                      'date': published,
+                      'downloadURL': ipa['browser_download_url'],
+                      'size': ipa.get('size', len(ipa_bytes)),
+                      'minOSVersion': min_os,
+                      'localizedDescription': release.get('body') or f'StikDebug {version}'
+                  }]
+              }]
+          }
+
+          with open('stikdebug.json', 'w', encoding='utf-8') as f:
+              json.dump(source, f, indent=2, ensure_ascii=False)
+              f.write('\n')
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add stikdebug.json
+          git diff --cached --quiet || git commit -m 'Update StikDebug AltSource'
+          git push
