@@ -13,13 +13,13 @@
       "tintColor": "4A90E2",
       "versions": [
         {
-          "version": "3.1.6",
+          "version": "3.1.7",
           "buildVersion": "1",
-          "date": "2026-06-17T04:07:42Z",
-          "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/download/3.1.6/StikDebug-3.1.6.ipa",
-          "size": 11028710,
+          "date": "2026-07-26T00:25:37Z",
+          "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/download/3.1.7/StikDebug-3.1.7.ipa",
+          "size": 12815045,
           "minOSVersion": "17.4",
-          "localizedDescription": "Fixes TXM checks for devices with A13/A14/M1 chips on iOS 27. Apps you want to enable JIT for require their own patches to work on those versions as well."
+          "localizedDescription": "Remove old screenshot scripts, rename UTM-Dolphin.js to legacy.js, fixes for the `script-name` query of the url scheme."
         }
       ]
     }
