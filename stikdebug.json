@@ -13,13 +13,13 @@
       "tintColor": "4A90E2",
       "versions": [
         {
-          "version": "3.1.7",
+          "version": "3.1.8",
           "buildVersion": "1",
-          "date": "2026-07-26T00:25:37Z",
-          "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/download/3.1.7/StikDebug-3.1.7.ipa",
-          "size": 12815045,
+          "date": "2026-07-31T15:01:19Z",
+          "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/download/3.1.8/StikDebug-3.1.8.ipa",
+          "size": 12818500,
           "minOSVersion": "17.4",
-          "localizedDescription": "Remove old screenshot scripts, rename UTM-Dolphin.js to legacy.js, fixes for the `script-name` query of the url scheme."
+          "localizedDescription": "Fix pairing file import, improve bounce-back reliability"
         }
       ]
     }
