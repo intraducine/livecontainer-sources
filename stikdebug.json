@@ -16,7 +16,7 @@
           "version": "3.1.9",
           "buildVersion": "1",
           "date": "2026-08-01T20:09:58Z",
-          "downloadURL": "https://github.com/StephenDev0/StikDebug/releases/download/3.1.9/StikDebug-3.1.9.ipa",
+          "downloadURL": "https://github.com/StikDebug/StikDebug/releases/download/3.1.9/StikDebug-3.1.9.ipa",
           "size": 12822956,
           "minOSVersion": "17.4",
           "localizedDescription": "Attempted another fix for pairing files.\r\nRenamed `rp_pairing_file.plist` back to `pairingFile.plist`.\r\n\r\n**Full Changelog**: https://github.com/StephenDev0/StikDebug/compare/3.1.8...3.1.9"
