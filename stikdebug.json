@@ -13,13 +13,13 @@
       "tintColor": "4A90E2",
       "versions": [
         {
-          "version": "3.1.9",
+          "version": "3.1.10",
           "buildVersion": "1",
-          "date": "2026-08-01T20:09:58Z",
-          "downloadURL": "https://github.com/StikDebug/StikDebug/releases/download/3.1.9/StikDebug-3.1.9.ipa",
-          "size": 12822956,
+          "date": "2026-08-27T04:07:04Z",
+          "downloadURL": "https://github.com/StikDebug/StikDebug/releases/download/3.1.10/StikDebug-3.1.10.ipa",
+          "size": 12824047,
           "minOSVersion": "17.4",
-          "localizedDescription": "Attempted another fix for pairing files.\r\nRenamed `rp_pairing_file.plist` back to `pairingFile.plist`.\r\n\r\n**Full Changelog**: https://github.com/StephenDev0/StikDebug/compare/3.1.8...3.1.9"
+          "localizedDescription": "**Full Changelog**: https://github.com/StikDebug/StikDebug/compare/3.1.9...3.1.10"
         }
       ]
     }
