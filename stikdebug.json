@@ -13,13 +13,13 @@
       "tintColor": "4A90E2",
       "versions": [
         {
-          "version": "3.1.13",
+          "version": "3.1.14",
           "buildVersion": "1",
-          "date": "2026-09-28T14:29:59Z",
-          "downloadURL": "https://github.com/StikDebug/StikDebug/releases/download/3.1.13/StikDebug-3.1.13.ipa",
-          "size": 13544310,
+          "date": "2026-10-12T03:13:42Z",
+          "downloadURL": "https://github.com/StikDebug/StikDebug/releases/download/3.1.14/StikDebug-3.1.14.ipa",
+          "size": 13544340,
           "minOSVersion": "17.4",
-          "localizedDescription": "Fix MeloCafé auto assign\n\n**Full Changelog**: https://github.com/StikDebug/StikDebug/compare/3.1.12...3.1.13"
+          "localizedDescription": "Add Husk support\n\n**Full Changelog**: https://github.com/StikDebug/StikDebug/compare/3.1.13...3.1.14"
         }
       ]
     }
